@@ -1,0 +1,32 @@
+{
+    "name":        "kohana/ohanzee-helpers",
+    "description": "Collection of helpers, small static classes for general purpose use"
+    "homepage":    "http://ohanzee.org/component/helpers",
+    "license":     "BSD-2-Clause",
+    "keywords":    ["kohana", "ohanzee", "components", "helpers"],
+    "authors": [
+        {
+            "name":     "Kohana/Ohanzee Team",
+            "email":    "team@ohanzee.org",
+            "homepage": "http://ohanzee.org"
+        },
+        {
+            "name":     "Ohanzee Contributors",
+            "homepage": "http://github.com/kohana/ohanzee-helpers/contributors"
+        }
+
+    ],
+    "support": {
+        "source":   "http://github.com/kohana/ohanzee-helpers",
+        "issues":   "http://github.com/kohana/ohanzee-helpers/issues",
+        "irc":      "irc://irc.freenode.net/kohana"
+    },
+    "require": {
+        "php":        ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Kohana\\Helper": "src/"
+        }
+    }
+}
