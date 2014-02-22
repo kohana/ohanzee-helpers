@@ -370,7 +370,7 @@ class File
 
         if (!empty(static::$mime_to_extension[$type])) {
             $types = static::$mime_to_extension[$type];
-            return $multi ? $types : $types[0];
+            return $multi ? array_values($types) : $types[0];
         }
         return $multi ? array() : false;
     }
