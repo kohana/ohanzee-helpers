@@ -308,7 +308,7 @@ class File
         }
 
         if ($extension) {
-            return File::mimeForExtension($extension);
+            return static::mimeForExtension($extension);
         }
 
         // Unable to find the mime-type
