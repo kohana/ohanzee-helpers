@@ -40,7 +40,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Kohana\Helper;
+namespace Ohanzee\Helper;
 
 class Date
 {
