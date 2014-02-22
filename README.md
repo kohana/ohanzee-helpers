@@ -1,4 +1,9 @@
-# Ohanzee Components by Kohana
+# Ohanzee Helpers
+
+This package contains a collection of helper components. These helpers are static
+classes that are completely stateless and have no dependencies.
+
+## Ohanzee Components by Kohana
 
 Ohanzee is a set of PHP components that are [dependency free][1], [PSR compatible][2],
 and [well documented][3]. The design is guided by [SOLID][4], [DRY][5], and [KISS][6]
