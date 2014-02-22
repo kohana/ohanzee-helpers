@@ -150,7 +150,7 @@ class Date
         // we choose to re-use seconds(), rather than creating an entirely new
         // function. Shhhh, it's cheating! ;) There are several more of these
         // in the following methods.
-        return Date::seconds($step);
+        return static::seconds($step);
     }
 
     /**
@@ -294,12 +294,12 @@ class Date
     {
         $months = array();
 
-        if ($format === Date::MONTHS_LONG || $format === Date::MONTHS_SHORT) {
+        if ($format === static::MONTHS_LONG || $format === static::MONTHS_SHORT) {
             for ($i = 1; $i <= 12; ++$i) {
                 $months[$i] = strftime($format, mktime(0, 0, 0, $i, 1));
             }
         } else {
-            $months = Date::hours();
+            $months = static::hours();
         }
 
         return $months;
@@ -372,27 +372,27 @@ class Date
         $timespan = abs($remote - $local);
 
         if (isset($output['years'])) {
-            $timespan -= Date::YEAR * ($output['years'] = (int) floor($timespan / Date::YEAR));
+            $timespan -= static::YEAR * ($output['years'] = (int) floor($timespan / static::YEAR));
         }
 
         if (isset($output['months'])) {
-            $timespan -= Date::MONTH * ($output['months'] = (int) floor($timespan / Date::MONTH));
+            $timespan -= static::MONTH * ($output['months'] = (int) floor($timespan / static::MONTH));
         }
 
         if (isset($output['weeks'])) {
-            $timespan -= Date::WEEK * ($output['weeks'] = (int) floor($timespan / Date::WEEK));
+            $timespan -= static::WEEK * ($output['weeks'] = (int) floor($timespan / static::WEEK));
         }
 
         if (isset($output['days'])) {
-            $timespan -= Date::DAY * ($output['days'] = (int) floor($timespan / Date::DAY));
+            $timespan -= static::DAY * ($output['days'] = (int) floor($timespan / static::DAY));
         }
 
         if (isset($output['hours'])) {
-            $timespan -= Date::HOUR * ($output['hours'] = (int) floor($timespan / Date::HOUR));
+            $timespan -= static::HOUR * ($output['hours'] = (int) floor($timespan / static::HOUR));
         }
 
         if (isset($output['minutes'])) {
-            $timespan -= Date::MINUTE * ($output['minutes'] = (int) floor($timespan / Date::MINUTE));
+            $timespan -= static::MINUTE * ($output['minutes'] = (int) floor($timespan / static::MINUTE));
         }
 
         // Seconds ago, 1
@@ -431,43 +431,43 @@ class Date
         // Determine the difference in seconds
         $offset = abs($local_timestamp - $timestamp);
 
-        if ($offset <= Date::MINUTE) {
+        if ($offset <= static::MINUTE) {
             $span = 'moments';
-        } elseif ($offset < (Date::MINUTE * 20)) {
+        } elseif ($offset < (static::MINUTE * 20)) {
             $span = 'a few minutes';
-        } elseif ($offset < Date::HOUR) {
+        } elseif ($offset < static::HOUR) {
             $span = 'less than an hour';
-        } elseif ($offset < (Date::HOUR * 4)) {
+        } elseif ($offset < (static::HOUR * 4)) {
             $span = 'a couple of hours';
-        } elseif ($offset < Date::DAY) {
+        } elseif ($offset < static::DAY) {
             $span = 'less than a day';
-        } elseif ($offset < (Date::DAY * 2)) {
+        } elseif ($offset < (static::DAY * 2)) {
             $span = 'about a day';
-        } elseif ($offset < (Date::DAY * 4)) {
+        } elseif ($offset < (static::DAY * 4)) {
             $span = 'a couple of days';
-        } elseif ($offset < Date::WEEK) {
+        } elseif ($offset < static::WEEK) {
             $span = 'less than a week';
-        } elseif ($offset < (Date::WEEK * 2)) {
+        } elseif ($offset < (static::WEEK * 2)) {
             $span = 'about a week';
-        } elseif ($offset < Date::MONTH) {
+        } elseif ($offset < static::MONTH) {
             $span = 'less than a month';
-        } elseif ($offset < (Date::MONTH * 2)) {
+        } elseif ($offset < (static::MONTH * 2)) {
             $span = 'about a month';
-        } elseif ($offset < (Date::MONTH * 4)) {
+        } elseif ($offset < (static::MONTH * 4)) {
             $span = 'a couple of months';
-        } elseif ($offset < Date::YEAR) {
+        } elseif ($offset < static::YEAR) {
             $span = 'less than a year';
-        } elseif ($offset < (Date::YEAR * 2)) {
+        } elseif ($offset < (static::YEAR * 2)) {
             $span = 'about a year';
-        } elseif ($offset < (Date::YEAR * 4)) {
+        } elseif ($offset < (static::YEAR * 4)) {
             $span = 'a couple of years';
-        } elseif ($offset < (Date::YEAR * 8)) {
+        } elseif ($offset < (static::YEAR * 8)) {
             $span = 'a few years';
-        } elseif ($offset < (Date::YEAR * 12)) {
+        } elseif ($offset < (static::YEAR * 12)) {
             $span = 'about a decade';
-        } elseif ($offset < (Date::YEAR * 24)) {
+        } elseif ($offset < (static::YEAR * 24)) {
             $span = 'a couple of decades';
-        } elseif ($offset < (Date::YEAR * 64)) {
+        } elseif ($offset < (static::YEAR * 64)) {
             $span = 'several decades';
         } else {
             $span = 'a long time';
@@ -545,11 +545,11 @@ class Date
     public static function formattedTime($datetime_str = 'now', $timestamp_format = null, $timezone = null)
     {
         if (!$timestamp_format) {
-            $timestamp_format = Date::$timestamp_format;
+            $timestamp_format = static::$timestamp_format;
         }
 
         if (!$timezone) {
-            $timezone = Date::$timezone;
+            $timezone = static::$timezone;
         }
 
         $tz   = new DateTimeZone($timezone);
