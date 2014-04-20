@@ -82,7 +82,7 @@ class Arr
      *     // Returns false
      *     Arr::isArray(false);
      *     Arr::isArray('not an array!');
-     *     Arr::isArray(Database::instance());
+     *     Arr::isArray(new stdclass);
      *
      * @param   mixed   $value  value to check
      * @return  boolean
@@ -92,9 +92,10 @@ class Arr
         if (is_array($value)) {
             return true;
         }
-        // Traversable is the interface that makes an object foreach'able,
-        // it is implemented by the SPL Iterator and IteratorAggregate classes.
-        return (is_object($value) && $value instanceof Traversable);
+        // ArrayAccess makes an object usable with array syntax.
+        // It does not necessarily make an object usable with foreach()!
+        // Foreach capability is implemented by the Traversable interface.
+        return (is_object($value) && $value instanceof \ArrayAccess);
     }
 
     /**
