@@ -1,5 +1,5 @@
 {
-    "name":        "kohana/ohanzee-helpers",
+    "name":        "ohanzee/helpers",
     "description": "Collection of helpers, small static classes for general purpose use",
     "homepage":    "http://ohanzee.org/component/helpers",
     "license":     "BSD-2-Clause",
