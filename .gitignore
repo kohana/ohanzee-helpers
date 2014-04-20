@@ -1,3 +1,6 @@
 # Composer packages
 composer.lock
 vendor/*
+
+# Test logs
+tests/_log
