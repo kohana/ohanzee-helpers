@@ -1,32 +1,35 @@
 {
-    "name":        "ohanzee/helpers",
+    "name": "ohanzee/helpers",
     "description": "Collection of helpers, small static classes for general purpose use",
-    "homepage":    "http://ohanzee.org/component/helpers",
-    "license":     "BSD-2-Clause",
-    "keywords":    ["kohana", "ohanzee", "components", "helpers"],
+    "homepage": "http://ohanzee.org/component/helpers",
+    "license": "BSD-2-Clause",
+    "keywords": ["kohana", "ohanzee", "components", "helpers"],
     "authors": [
         {
-            "name":     "Kohana/Ohanzee Team",
-            "email":    "team@kohanaframework.org",
+            "name": "Kohana/Ohanzee Team",
+            "email": "team@kohanaframework.org",
             "homepage": "http://ohanzee.org"
         },
         {
-            "name":     "Ohanzee Contributors",
+            "name": "Ohanzee Contributors",
             "homepage": "http://github.com/kohana/ohanzee-helpers/contributors"
         }
 
     ],
     "support": {
-        "source":   "http://github.com/kohana/ohanzee-helpers",
-        "issues":   "http://github.com/kohana/ohanzee-helpers/issues",
-        "irc":      "irc://irc.freenode.net/kohana"
-    },
-    "require": {
-        "php":        ">=5.4.0"
+        "source": "http://github.com/kohana/ohanzee-helpers",
+        "issues": "http://github.com/kohana/ohanzee-helpers/issues",
+        "irc": "irc://irc.freenode.net/kohana"
     },
     "autoload": {
         "psr-4": {
             "Ohanzee\\Helper\\": "src/"
         }
+    },
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "codeception/codeception": "1.8.*@dev"
     }
 }
