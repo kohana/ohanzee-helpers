@@ -4,6 +4,9 @@ namespace Ohanzee\Helper;
 
 class File
 {
+    // 8k blocks of file
+    const BLOCK_SIZE = 8192;
+
     /**
      * Split a file into pieces matching a specific size. Used when you need to
      * split large files into smaller pieces for easy transmission.
@@ -22,9 +25,6 @@ class File
         // Change the piece size to bytes
         $piece_size = floor($piece_size * 1024 * 1024);
 
-        // Write files in 8k blocks
-        $block_size = 1024 * 8;
-
         // Total number of pieces
         $pieces = 0;
 
@@ -34,17 +34,17 @@ class File
 
             // Create a new file piece
             $piece = str_pad($pieces, 3, '0', STR_PAD_LEFT);
-            $piece = fopen($filename.'.'.$piece, 'wb+');
+            $piece = fopen($filename . '.' . $piece, 'wb+');
 
             // Number of bytes read
             $read = 0;
 
             do {
                 // Transfer the data in blocks
-                fwrite($piece, fread($file, $block_size));
+                fwrite($piece, fread($file, static::BLOCK_SIZE));
 
                 // Another block has been read
-                $read += $block_size;
+                $read += static::BLOCK_SIZE;
             } while ($read < $piece_size);
 
             // Close the piece
@@ -70,13 +70,10 @@ class File
         // Open the file
         $file = fopen($filename, 'wb+');
 
-        // Read files in 8k blocks
-        $block_size = 1024 * 8;
-
         // Total number of pieces
         $pieces = 0;
 
-        while (is_file($piece = $filename.'.'.str_pad($pieces + 1, 3, '0', STR_PAD_LEFT))) {
+        while (is_file($piece = $filename . '.' . str_pad($pieces + 1, 3, '0', STR_PAD_LEFT))) {
             // Read another piece
             $pieces += 1;
 
@@ -85,7 +82,7 @@ class File
 
             while (!feof($piece)) {
                 // Transfer the data in blocks
-                fwrite($file, fread($piece, $block_size));
+                fwrite($file, fread($piece, static::BLOCK_SIZE));
             }
 
             // Close the piece

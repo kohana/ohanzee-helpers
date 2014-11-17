@@ -4,6 +4,8 @@ namespace Ohanzee\Helper;
 
 class Cookie
 {
+    // Separate the salt and the value
+    const SALT_SEPARATOR = '~';
 
     /**
      * @var  string  Magic salt to add to the cookie
@@ -60,9 +62,9 @@ class Cookie
         // Find the position of the split between salt and contents
         $split = strlen(static::salt($key, null));
 
-        if (isset($cookie[$split]) && $cookie[$split] === '~') {
+        if (isset($cookie[$split]) && $cookie[$split] == static::SALT_SEPARATOR) {
             // Separate the salt and the value
-            list ($hash, $value) = explode('~', $cookie, 2);
+            list ($hash, $value) = explode(static::SALT_SEPARATOR, $cookie, 2);
 
             if (static::salt($key, $value) === $hash) {
                 // Cookie signature is valid
@@ -102,7 +104,7 @@ class Cookie
         }
 
         // Add the salt to the cookie value
-        $value = static::salt($name, $value).'~'.$value;
+        $value = static::salt($name, $value) . static::SALT_SEPARATOR. $value;
 
         return setcookie($name, $value, $expiration, static::$path, static::$domain, static::$secure, static::$httponly);
     }
@@ -137,15 +139,15 @@ class Cookie
     {
         // Require a valid salt
         if (!static::$salt) {
-            throw new InvalidArgumentException(
+            throw new UnexpectedValueException(
                 'A valid cookie salt is required. Please set Cookie::$salt before calling this method.' .
-                'For more information check the documentation'
+                'For more information check the documentation.'
             );
         }
 
         // Determine the user agent
         $agent = isset($_SERVER['HTTP_USER_AGENT']) ? strtolower($_SERVER['HTTP_USER_AGENT']) : 'unknown';
 
-        return sha1($agent.$name.$value.static::$salt);
+        return sha1($agent . $name . $value . static::$salt);
     }
 }
