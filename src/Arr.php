@@ -510,7 +510,7 @@ class Arr
     }
 
     /**
-     * Convert a two-dimesion keyed array with key/value structure into an associated array.
+     * Convert a two-dimension keyed array with key/value structure into an associated array.
      *
      *     $array = array(array('field' => 'fname', 'value' => 'John'), array('field' => 'lname', 'value' => 'Doe'));
      *
@@ -541,12 +541,15 @@ class Arr
         if (function_exists('array_column')) {
             return array_combine(array_column($collection, $key), array_column($collection, $value));
         } else {
-            return array_combine(static::path($collection, array('*', $key)), static::path($collection, array('*', $value)));
+            return array_combine(
+                static::path($collection, array('*', $key)),
+                static::path($collection, array('*', $value))
+            );
         }
     }
 
     /**
-     * Convert a key/value array into two-dimenstion key/value structured array
+     * Convert a key/value array into two-dimension key/value structured array
      *
      *     $array = array('fname' => 'John', 'lname' => 'Doe');
      *
