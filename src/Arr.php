@@ -527,14 +527,14 @@ class Arr
      *
      * @return array
      */
-    public static function fromCollection(array $collection, $recursive = false, $key = 'name', $value = 'value')
+    public static function fromMapping(array $collection, $recursive = false, $key = 'name', $value = 'value')
     {
         foreach ($collection as $index => $obj) {
             if (!is_array($obj) || !isset($obj[$key]) || !isset($obj[$value])) {
                 unset($collection[$index]);
             }
             if ($recursive && is_array($obj[$value]) && !static::isAssoc($obj[$value])) {
-                $collection[$index][$value] = static::fromCollection($obj[$value], $recursive, $key, $value);
+                $collection[$index][$value] = static::fromMapping($obj[$value], $recursive, $key, $value);
             }
         }
 
@@ -542,8 +542,8 @@ class Arr
             return array_combine(array_column($collection, $key), array_column($collection, $value));
         } else {
             return array_combine(
-                static::path($collection, array('*', $key)),
-                static::path($collection, array('*', $value))
+                static::path($collection, ['*', $key]),
+                static::path($collection, ['*', $value])
             );
         }
     }
@@ -566,14 +566,14 @@ class Arr
      *
      * @return array
      */
-    public static function toCollection(array $array, $recursive = false, $key = 'name', $value = 'value')
+    public static function toMapping(array $array, $recursive = false, $key = 'name', $value = 'value')
     {
         foreach ($array as $index => $obj) {
-            $array[$index] = array(
+            $array[$index] = [
                 $key   => $index,
                 $value => is_array($obj) && static::isAssoc($obj) && $recursive
-                    ? static::toCollection($obj, $recursive) : $obj,
-            );
+                    ? static::toMapping($obj, $recursive) : $obj,
+            ];
         }
 
         return array_values($array);
