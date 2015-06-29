@@ -542,8 +542,8 @@ class Arr
             return array_combine(array_column($collection, $key), array_column($collection, $value));
         } else {
             return array_combine(
-                static::path($collection, ['*', $key]),
-                static::path($collection, ['*', $value])
+                static::path($collection, array('*', $key)),
+                static::path($collection, array('*', $value))
             );
         }
     }
@@ -569,11 +569,11 @@ class Arr
     public static function toMapping(array $array, $recursive = false, $key = 'name', $value = 'value')
     {
         foreach ($array as $index => $obj) {
-            $array[$index] = [
+            $array[$index] = array(
                 $key   => $index,
                 $value => is_array($obj) && static::isAssoc($obj) && $recursive
                     ? static::toMapping($obj, $recursive) : $obj,
-            ];
+            );
         }
 
         return array_values($array);
