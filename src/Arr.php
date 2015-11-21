@@ -515,7 +515,7 @@ class Arr
      *     $array = array(array('field' => 'fname', 'value' => 'John'), array('field' => 'lname', 'value' => 'Doe'));
      *
      *     // Convert the array
-     *     $array = Arr::fromCollection($array, false, 'field');
+     *     $array = Arr::fromMapping($array, false, 'field');
      *
      *     // The array will now be
      *     array('fname' => 'John', 'lname' => 'Doe');
@@ -554,7 +554,7 @@ class Arr
      *     $array = array('fname' => 'John', 'lname' => 'Doe');
      *
      *     // Convert the array
-     *     $array = Arr::toCollection($array, false, 'field');
+     *     $array = Arr::toMapping($array, false, 'field');
      *
      *     // The array will now be
      *     array(array('field' => 'fname', 'value' => 'John'), array('field' => 'lname', 'value' => 'Doe'));
