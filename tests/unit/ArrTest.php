@@ -254,7 +254,6 @@ class ArrTest extends Test
     }
 
     /**
-     * @covers \Ohanzee\Helper\Arr::fromMapping()
      * @dataProvider dataMappedContact
      */
     public function testFromMapping($arr)
@@ -270,7 +269,6 @@ class ArrTest extends Test
     }
 
     /**
-     * @covers \Ohanzee\Helper\Arr::fromMapping()
      * @dataProvider dataMappedContact
      */
     public function testFromMappingEmpty($arr)
@@ -282,7 +280,6 @@ class ArrTest extends Test
     }
 
     /**
-     * @covers \Ohanzee\Helper\Arr::fromMapping()
      * @dataProvider dataMappedContactRecursive
      */
     public function testFromMappingRecursive($arr)
@@ -300,7 +297,6 @@ class ArrTest extends Test
     }
 
     /**
-     * @covers \Ohanzee\Helper\Arr::fromMapping()
      * @dataProvider dataMappedContactDifferent
      */
     public function testFromMappingDifferent($arr)
@@ -348,7 +344,6 @@ class ArrTest extends Test
     }
 
     /**
-     * @covers \Ohanzee\Helper\Arr::toMapping()
      * @dataProvider dataRelatedContact
      */
     public function testToMapping($arr)
@@ -375,7 +370,6 @@ class ArrTest extends Test
     }
 
     /**
-     * @covers \Ohanzee\Helper\Arr::toMapping()
      * @dataProvider dataRelatedContactRecursive
      */
     public function testToMappingRecursive($arr)
@@ -408,7 +402,6 @@ class ArrTest extends Test
     }
 
     /**
-     * @covers \Ohanzee\Helper\Arr::toMapping()
      * @dataProvider dataRelatedContact
      */
     public function testToMappingDifferent($arr)
