@@ -172,85 +172,85 @@ class ArrTest extends Test
 
     public function dataMappedContact()
     {
-        return array(
-            array(
-                array(
-                    array(
-                        'name' => 'fname',
+        return [
+            [
+                [
+                    [
+                        'name'  => 'fname',
                         'value' => 'Sherlock',
-                    ),
-                    array(
-                        'name' => 'lname',
+                    ],
+                    [
+                        'name'  => 'lname',
                         'value' => 'Holmes',
-                    ),
-                    array(
-                        'name' => 'street',
+                    ],
+                    [
+                        'name'  => 'street',
                         'value' => 'Baker',
-                    ),
-                    array(
-                        'name' => 'house',
+                    ],
+                    [
+                        'name'  => 'house',
                         'value' => '221B',
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
     }
 
     public function dataMappedContactRecursive()
     {
-        return array(
-            array(
-                array(
-                    array(
-                        'name' => 'fname',
+        return [
+            [
+                [
+                    [
+                        'name'  => 'fname',
                         'value' => 'Sherlock',
-                    ),
-                    array(
-                        'name' => 'lname',
+                    ],
+                    [
+                        'name'  => 'lname',
                         'value' => 'Holmes',
-                    ),
-                    array(
-                        'name' => 'address',
-                        'value' => array(
-                            array(
-                                'name' => 'street',
+                    ],
+                    [
+                        'name'  => 'address',
+                        'value' => [
+                            [
+                                'name'  => 'street',
                                 'value' => 'Baker',
-                            ),
-                            array(
-                                'name' => 'house',
+                            ],
+                            [
+                                'name'  => 'house',
                                 'value' => '221B',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 
     public function dataMappedContactDifferent()
     {
-        return array(
-            array(
-                array(
-                    array(
+        return [
+            [
+                [
+                    [
                         'field' => 'fname',
-                        'val' => 'Sherlock',
-                    ),
-                    array(
+                        'val'   => 'Sherlock',
+                    ],
+                    [
                         'field' => 'lname',
-                        'val' => 'Holmes',
-                    ),
-                    array(
+                        'val'   => 'Holmes',
+                    ],
+                    [
                         'field' => 'street',
-                        'val' => 'Baker',
-                    ),
-                    array(
+                        'val'   => 'Baker',
+                    ],
+                    [
                         'field' => 'house',
-                        'val' => '221B',
-                    ),
-                ),
-            ),
-        );
+                        'val'   => '221B',
+                    ],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -259,12 +259,12 @@ class ArrTest extends Test
      */
     public function testFromMapping($arr)
     {
-        $expected = array(
-            'fname' => 'Sherlock',
-            'lname' => 'Holmes',
+        $expected = [
+            'fname'  => 'Sherlock',
+            'lname'  => 'Holmes',
             'street' => 'Baker',
-            'house' => '221B',
-        );
+            'house'  => '221B',
+        ];
         $this->assertEquals($expected, Arr::fromMapping($arr));
 //        $this->assertEquals($expected, $arr);
     }
@@ -275,7 +275,7 @@ class ArrTest extends Test
      */
     public function testFromMappingEmpty($arr)
     {
-        $expected = array();
+        $expected = [];
         $recursive = false;
         $key = 'key';
         $this->assertEquals($expected, Arr::fromMapping($arr, $recursive, $key));
@@ -287,14 +287,14 @@ class ArrTest extends Test
      */
     public function testFromMappingRecursive($arr)
     {
-        $expected = array(
-            'fname' => 'Sherlock',
-            'lname' => 'Holmes',
-            'address' => array(
+        $expected = [
+            'fname'   => 'Sherlock',
+            'lname'   => 'Holmes',
+            'address' => [
                 'street' => 'Baker',
-                'house' => '221B',
-            ),
-        );
+                'house'  => '221B',
+            ],
+        ];
         $recursive = true;
         $this->assertEquals($expected, Arr::fromMapping($arr, $recursive));
     }
@@ -305,12 +305,12 @@ class ArrTest extends Test
      */
     public function testFromMappingDifferent($arr)
     {
-        $expected = array(
-            'fname' => 'Sherlock',
-            'lname' => 'Holmes',
+        $expected = [
+            'fname'  => 'Sherlock',
+            'lname'  => 'Holmes',
             'street' => 'Baker',
-            'house' => '221B',
-        );
+            'house'  => '221B',
+        ];
         $recursive = false;
         $key = 'field';
         $value = 'val';
@@ -319,32 +319,32 @@ class ArrTest extends Test
 
     public function dataRelatedContact()
     {
-        return array(
-            array(
-                array(
-                    'fname' => 'Sherlock',
-                    'lname' => 'Holmes',
+        return [
+            [
+                [
+                    'fname'  => 'Sherlock',
+                    'lname'  => 'Holmes',
                     'street' => 'Baker',
-                    'house' => '221B',
-                ),
-            ),
-        );
+                    'house'  => '221B',
+                ],
+            ],
+        ];
     }
 
     public function dataRelatedContactRecursive()
     {
-        return array(
-            array(
-                array(
-                    'fname' => 'Sherlock',
-                    'lname' => 'Holmes',
-                    'address' => array(
+        return [
+            [
+                [
+                    'fname'   => 'Sherlock',
+                    'lname'   => 'Holmes',
+                    'address' => [
                         'street' => 'Baker',
-                        'house' => '221B',
-                    ),
-                ),
-            ),
-        );
+                        'house'  => '221B',
+                    ],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -353,24 +353,24 @@ class ArrTest extends Test
      */
     public function testToMapping($arr)
     {
-        $expected = array(
-            array(
-                'name' => 'fname',
+        $expected = [
+            [
+                'name'  => 'fname',
                 'value' => 'Sherlock',
-            ),
-            array(
-                'name' => 'lname',
+            ],
+            [
+                'name'  => 'lname',
                 'value' => 'Holmes',
-            ),
-            array(
-                'name' => 'street',
+            ],
+            [
+                'name'  => 'street',
                 'value' => 'Baker',
-            ),
-            array(
-                'name' => 'house',
+            ],
+            [
+                'name'  => 'house',
                 'value' => '221B',
-            ),
-        );
+            ],
+        ];
         $this->assertEquals($expected, Arr::toMapping($arr));
     }
 
@@ -380,29 +380,29 @@ class ArrTest extends Test
      */
     public function testToMappingRecursive($arr)
     {
-        $expected = array(
-            array(
-                'name' => 'fname',
+        $expected = [
+            [
+                'name'  => 'fname',
                 'value' => 'Sherlock',
-            ),
-            array(
-                'name' => 'lname',
+            ],
+            [
+                'name'  => 'lname',
                 'value' => 'Holmes',
-            ),
-            array(
-                'name' => 'address',
-                'value' => array(
-                    array(
-                        'name' => 'street',
+            ],
+            [
+                'name'  => 'address',
+                'value' => [
+                    [
+                        'name'  => 'street',
                         'value' => 'Baker',
-                    ),
-                    array(
-                        'name' => 'house',
+                    ],
+                    [
+                        'name'  => 'house',
                         'value' => '221B',
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
         $recursive = true;
         $this->assertEquals($expected, Arr::toMapping($arr, $recursive));
     }
@@ -413,24 +413,24 @@ class ArrTest extends Test
      */
     public function testToMappingDifferent($arr)
     {
-        $expected = array(
-            array(
+        $expected = [
+            [
                 'field' => 'fname',
-                'val' => 'Sherlock',
-            ),
-            array(
+                'val'   => 'Sherlock',
+            ],
+            [
                 'field' => 'lname',
-                'val' => 'Holmes',
-            ),
-            array(
+                'val'   => 'Holmes',
+            ],
+            [
                 'field' => 'street',
-                'val' => 'Baker',
-            ),
-            array(
+                'val'   => 'Baker',
+            ],
+            [
                 'field' => 'house',
-                'val' => '221B',
-            ),
-        );
+                'val'   => '221B',
+            ],
+        ];
         $recursive = false;
         $key = 'field';
         $value = 'val';
