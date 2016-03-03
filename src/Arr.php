@@ -515,7 +515,7 @@ class Arr
      *     $array = array(array('field' => 'fname', 'value' => 'John'), array('field' => 'lname', 'value' => 'Doe'));
      *
      *     // Convert the array
-     *     $array = Arr::fromCollection($array, false, 'field');
+     *     $array = Arr::fromMapping($array, false, 'field');
      *
      *     // The array will now be
      *     array('fname' => 'John', 'lname' => 'Doe');
@@ -542,8 +542,8 @@ class Arr
             return array_combine(array_column($collection, $key), array_column($collection, $value));
         } else {
             return array_combine(
-                static::path($collection, array('*', $key)),
-                static::path($collection, array('*', $value))
+                static::path($collection, ['*', $key]),
+                static::path($collection, ['*', $value])
             );
         }
     }
@@ -554,7 +554,7 @@ class Arr
      *     $array = array('fname' => 'John', 'lname' => 'Doe');
      *
      *     // Convert the array
-     *     $array = Arr::toCollection($array, false, 'field');
+     *     $array = Arr::toMapping($array, false, 'field');
      *
      *     // The array will now be
      *     array(array('field' => 'fname', 'value' => 'John'), array('field' => 'lname', 'value' => 'Doe'));
@@ -569,11 +569,11 @@ class Arr
     public static function toMapping(array $array, $recursive = false, $key = 'name', $value = 'value')
     {
         foreach ($array as $index => $obj) {
-            $array[$index] = array(
+            $array[$index] = [
                 $key   => $index,
                 $value => is_array($obj) && static::isAssoc($obj) && $recursive
                     ? static::toMapping($obj, $recursive) : $obj,
-            );
+            ];
         }
 
         return array_values($array);

@@ -169,4 +169,264 @@ class ArrTest extends Test
             );
         $this->assertEquals(Arr::extract($arr['top'], $paths, $default), $expect);
     }
+
+    public function dataMappedContact()
+    {
+        return [
+            [
+                [
+                    [
+                        'name'  => 'fname',
+                        'value' => 'Sherlock',
+                    ],
+                    [
+                        'name'  => 'lname',
+                        'value' => 'Holmes',
+                    ],
+                    [
+                        'name'  => 'street',
+                        'value' => 'Baker',
+                    ],
+                    [
+                        'name'  => 'house',
+                        'value' => '221B',
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    public function dataMappedContactRecursive()
+    {
+        return [
+            [
+                [
+                    [
+                        'name'  => 'fname',
+                        'value' => 'Sherlock',
+                    ],
+                    [
+                        'name'  => 'lname',
+                        'value' => 'Holmes',
+                    ],
+                    [
+                        'name'  => 'address',
+                        'value' => [
+                            [
+                                'name'  => 'street',
+                                'value' => 'Baker',
+                            ],
+                            [
+                                'name'  => 'house',
+                                'value' => '221B',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    public function dataMappedContactDifferent()
+    {
+        return [
+            [
+                [
+                    [
+                        'field' => 'fname',
+                        'val'   => 'Sherlock',
+                    ],
+                    [
+                        'field' => 'lname',
+                        'val'   => 'Holmes',
+                    ],
+                    [
+                        'field' => 'street',
+                        'val'   => 'Baker',
+                    ],
+                    [
+                        'field' => 'house',
+                        'val'   => '221B',
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataMappedContact
+     */
+    public function testFromMapping($arr)
+    {
+        $expected = [
+            'fname'  => 'Sherlock',
+            'lname'  => 'Holmes',
+            'street' => 'Baker',
+            'house'  => '221B',
+        ];
+        $this->assertEquals($expected, Arr::fromMapping($arr));
+//        $this->assertEquals($expected, $arr);
+    }
+
+    /**
+     * @dataProvider dataMappedContact
+     */
+    public function testFromMappingEmpty($arr)
+    {
+        $expected = [];
+        $recursive = false;
+        $key = 'key';
+        $this->assertEquals($expected, Arr::fromMapping($arr, $recursive, $key));
+    }
+
+    /**
+     * @dataProvider dataMappedContactRecursive
+     */
+    public function testFromMappingRecursive($arr)
+    {
+        $expected = [
+            'fname'   => 'Sherlock',
+            'lname'   => 'Holmes',
+            'address' => [
+                'street' => 'Baker',
+                'house'  => '221B',
+            ],
+        ];
+        $recursive = true;
+        $this->assertEquals($expected, Arr::fromMapping($arr, $recursive));
+    }
+
+    /**
+     * @dataProvider dataMappedContactDifferent
+     */
+    public function testFromMappingDifferent($arr)
+    {
+        $expected = [
+            'fname'  => 'Sherlock',
+            'lname'  => 'Holmes',
+            'street' => 'Baker',
+            'house'  => '221B',
+        ];
+        $recursive = false;
+        $key = 'field';
+        $value = 'val';
+        $this->assertEquals($expected, Arr::fromMapping($arr, $recursive, $key, $value));
+    }
+
+    public function dataRelatedContact()
+    {
+        return [
+            [
+                [
+                    'fname'  => 'Sherlock',
+                    'lname'  => 'Holmes',
+                    'street' => 'Baker',
+                    'house'  => '221B',
+                ],
+            ],
+        ];
+    }
+
+    public function dataRelatedContactRecursive()
+    {
+        return [
+            [
+                [
+                    'fname'   => 'Sherlock',
+                    'lname'   => 'Holmes',
+                    'address' => [
+                        'street' => 'Baker',
+                        'house'  => '221B',
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataRelatedContact
+     */
+    public function testToMapping($arr)
+    {
+        $expected = [
+            [
+                'name'  => 'fname',
+                'value' => 'Sherlock',
+            ],
+            [
+                'name'  => 'lname',
+                'value' => 'Holmes',
+            ],
+            [
+                'name'  => 'street',
+                'value' => 'Baker',
+            ],
+            [
+                'name'  => 'house',
+                'value' => '221B',
+            ],
+        ];
+        $this->assertEquals($expected, Arr::toMapping($arr));
+    }
+
+    /**
+     * @dataProvider dataRelatedContactRecursive
+     */
+    public function testToMappingRecursive($arr)
+    {
+        $expected = [
+            [
+                'name'  => 'fname',
+                'value' => 'Sherlock',
+            ],
+            [
+                'name'  => 'lname',
+                'value' => 'Holmes',
+            ],
+            [
+                'name'  => 'address',
+                'value' => [
+                    [
+                        'name'  => 'street',
+                        'value' => 'Baker',
+                    ],
+                    [
+                        'name'  => 'house',
+                        'value' => '221B',
+                    ],
+                ],
+            ],
+        ];
+        $recursive = true;
+        $this->assertEquals($expected, Arr::toMapping($arr, $recursive));
+    }
+
+    /**
+     * @dataProvider dataRelatedContact
+     */
+    public function testToMappingDifferent($arr)
+    {
+        $expected = [
+            [
+                'field' => 'fname',
+                'val'   => 'Sherlock',
+            ],
+            [
+                'field' => 'lname',
+                'val'   => 'Holmes',
+            ],
+            [
+                'field' => 'street',
+                'val'   => 'Baker',
+            ],
+            [
+                'field' => 'house',
+                'val'   => '221B',
+            ],
+        ];
+        $recursive = false;
+        $key = 'field';
+        $value = 'val';
+        $this->assertEquals($expected, Arr::toMapping($arr, $recursive, $key, $value));
+    }
 }
